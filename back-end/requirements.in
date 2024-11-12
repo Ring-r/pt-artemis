@@ -1,0 +1,7 @@
+pillow
+timm
+torch
+transformers
+
+fastapi[standard]
+uvicorn
