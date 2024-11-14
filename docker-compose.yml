@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  web-api:
+    image: web-api
+    build:
+      context: ./back-end/
+    ports:
+      - "8000:8000"
+    networks:
+      - my-network
+
+  web-app:
+    image: web-app
+    build:
+      context: ./front-end/
+    ports:
+      - "3000:80"
+    environment:
+      - API_URL=http://web-api:8000
+    networks:
+      - my-network
+
+networks:
+  my-network:
+
