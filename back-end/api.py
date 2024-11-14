@@ -19,7 +19,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://Ring-r.github.io/pt-artemis"],
+    allow_origins=["http://localhost:3000", "https://ring-r.github.io"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
