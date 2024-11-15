@@ -132,7 +132,7 @@ sudo docker-compose down
 - The backend does not yet fully optimize for efficiency. It would be beneficial to separate the web request handling from the machine learning computation to improve performance. The request works too long.
 
 **Part 3: Frontend Development**
-- Usability issues remain unresolved due to time constraints.
+- Usability issues remain unresolved.
 
 ### Challanges
 
