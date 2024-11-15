@@ -252,7 +252,7 @@ const MainCapture: React.FC = () => {
     formData.append('file', imageBlob, (new Date()).getTime().toString() + '.png');
 
     try {
-      const response = await fetch(`${apiUrl}/upload/`, {
+      const response = await fetch(`${apiUrl}/api/upload/`, {
         method: 'POST',
         body: formData,
       });

@@ -1,6 +1,5 @@
 {
   "name": "pt-artemis",
-  "homepage": "https://Ring-r.github.io/pt-artemis",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

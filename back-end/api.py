@@ -1,3 +1,4 @@
+import os
 import shutil
 from datetime import datetime
 from pathlib import Path
@@ -12,28 +13,31 @@ from PIL import Image
 from transformers import AutoModelForObjectDetection
 from transformers import AutoProcessor
 
-UPLOAD_DIRECTORY_PATH = Path("uploaded_files")
-UPLOAD_DIRECTORY_PATH.mkdir(exist_ok=True)
+MEDIA_DIRECTORY_PATH = Path(os.getenv("MEDIA_DIRECTORY_PATH", "media"))
+ALLOW_ORIGINS = os.getenv("ALLOW_ORIGINS", None)
+
+MEDIA_DIRECTORY_PATH.mkdir(parents=True, exist_ok=True)
 
 app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://ring-r.github.io"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+if ALLOW_ORIGINS is not None:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=ALLOW_ORIGINS.split(","),
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 
-@app.get("/ping/")
+@app.get("/api/ping/")
 async def ping():
     return "pong"
 
 
-@app.post("/upload/")
+@app.post("/api/upload/")
 async def upload_file(file: UploadFile = File(...)):
-    file_location = UPLOAD_DIRECTORY_PATH / f"{datetime.now().timestamp()}.png"
+    file_location = MEDIA_DIRECTORY_PATH / f"{datetime.now().timestamp()}.png"
     with file_location.open("wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
